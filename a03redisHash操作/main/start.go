@@ -17,7 +17,8 @@ func main() {
 	defer conn.Close()
 	//写入Hash类型数据	k-v(map)
 	//user01- name:tom  	 user02- age:18
-	_, err = conn.Do("HSet", "user01", "name", "tom")
+	//_, err = conn.Do("HSet", "user01", "name", "tom")
+	_, err = conn.Do("HSet", "users", 100, "{\"userId\":100,\"userPwd\":\"123\",\"userName\":\"sussenn\"}")
 	if err != nil {
 		fmt.Println("conn.Do() HSet-> err:", err)
 		return
@@ -27,7 +28,6 @@ func main() {
 		fmt.Println("conn.Do() HSet-> err:", err)
 		return
 	}
-
 	//读取Hash类型数据
 	r1, err := redis.String(conn.Do("HGet", "user01", "name"))
 	if err != nil {

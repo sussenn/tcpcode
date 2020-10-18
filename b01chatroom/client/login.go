@@ -4,7 +4,8 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	"mygithub/tcpcode/b01chatroom/common/message"
+	"tcpcode/b01chatroom/common/message"
+	//"mygithub/tcpcode/b01chatroom/common/message"
 	"net"
 )
 
@@ -15,7 +16,7 @@ func login(userId int, userPwd string) (err error) {
 		fmt.Println("客户端连接服务器失败. err: ", err)
 		return
 	}
-	conn.Close()
+	defer conn.Close()
 	//2.定义传输消息体
 	var mes message.Message
 	//消息体的类型-> 登录信息类型
@@ -45,6 +46,7 @@ func login(userId int, userPwd string) (err error) {
 	var pkgLen uint32
 	pkgLen = uint32(len(data))
 	var buf [4]byte
+	//将消息长度放入buf切片
 	binary.BigEndian.PutUint32(buf[0:4], pkgLen)
 	//5.2发送数据长度信息
 	n, err := conn.Write(buf[:4])

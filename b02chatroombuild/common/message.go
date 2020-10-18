@@ -7,9 +7,10 @@ type Message struct {
 }
 
 const (
-	LoginMesType    = "LoginMes"
-	LoginResMesType = "LoginResMes"
-	RegisterMesType = "RegisterMes"
+	LoginMesType       = "LoginMes"
+	LoginResMesType    = "LoginResMes"
+	RegisterMesType    = "RegisterMes"
+	RegisterResMesType = "RegisterResMes"
 )
 
 //登录响应结果 消息体
@@ -27,5 +28,10 @@ type LoginMes struct {
 
 //注册 消息体
 type RegisterMes struct {
-	//...
+	User User `json:"user"`
+}
+
+type RegisterResMes struct {
+	Code  int    `json:"code"`
+	Error string `json:"error"`
 }
