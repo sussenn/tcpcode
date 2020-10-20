@@ -4,8 +4,9 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+	message "mygithub/tcpcode/b02chatroombuild/common"
 	"net"
-	message "tcpcode/b02chatroombuild/common"
+	//message "tcpcode/b02chatroombuild/common"
 )
 
 type Transfer struct {
@@ -15,8 +16,7 @@ type Transfer struct {
 
 //读客户端消息
 func (this *Transfer) ReadPkg() (mes message.Message, err error) {
-
-	fmt.Println("客户端发送消息...")
+	//fmt.Println("客户端发送消息...")
 	_, err = this.Conn.Read(this.Buf[:4])
 	if err != nil {
 		//自定义异常: 读包, header头出错

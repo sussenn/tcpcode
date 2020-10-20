@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"mygithub/tcpcode/b02chatroombuild/client/processCli"
 	"os"
-	"tcpcode/b02chatroombuild/client/processCli"
+	//"tcpcode/b02chatroombuild/client/processCli"
 )
 
 //账户 密码
@@ -11,14 +12,15 @@ var userId int
 var userPwd string
 var userName string
 
+//go build -o client.exe
 func main() {
 	//接收 键盘输入的选择
 	var key int
 	for {
 		fmt.Println("--------------欢迎登录--------------")
-		fmt.Println("\t\t\t 1 登录")
-		fmt.Println("\t\t\t 2 注册")
-		fmt.Println("\t\t\t 3 退出")
+		fmt.Println("\t\t 1 登录")
+		fmt.Println("\t\t 2 注册")
+		fmt.Println("\t\t 3 退出")
 		fmt.Println("请选择(1-3):")
 		//接收键盘输入
 		fmt.Scanf("%d\n", &key)

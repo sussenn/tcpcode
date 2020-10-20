@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"tcpcode/b01chatroom/common/message"
-	//"mygithub/tcpcode/b01chatroom/common/message"
+	//"tcpcode/b01chatroom/common/message"
+	"mygithub/tcpcode/b01chatroom/common/message"
 	"net"
 )
 

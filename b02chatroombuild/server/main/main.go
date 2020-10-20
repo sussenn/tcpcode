@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"mygithub/tcpcode/b02chatroombuild/server/model"
 	"net"
-	"tcpcode/b02chatroombuild/server/model"
+	//"tcpcode/b02chatroombuild/server/model"
 	"time"
 )
 

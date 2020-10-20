@@ -3,14 +3,18 @@ package processSer
 import (
 	"encoding/json"
 	"fmt"
+	message "mygithub/tcpcode/b02chatroombuild/common"
+	"mygithub/tcpcode/b02chatroombuild/server/model"
+	"mygithub/tcpcode/b02chatroombuild/server/utils"
 	"net"
-	message "tcpcode/b02chatroombuild/common"
-	"tcpcode/b02chatroombuild/server/model"
-	"tcpcode/b02chatroombuild/server/utils"
+	//message "tcpcode/b02chatroombuild/common"
+	//"tcpcode/b02chatroombuild/server/model"
+	//"tcpcode/b02chatroombuild/server/utils"
 )
 
 type UserProcess struct {
-	Conn net.Conn
+	Conn   net.Conn
+	UserId int
 }
 
 //登录处理
@@ -45,6 +49,16 @@ func (this *UserProcess) ServerProcessLogin(mes *message.Message) (err error) {
 	} else {
 		loginResMes.Code = 200
 		fmt.Println("用户登录成功,用户信息: ", user)
+		//将登录成功的用户id获取到
+		this.UserId = loginMes.UserId
+		//调用函数,存储
+		userMgr.AddOnlineUser(this)
+		//通知其它的在线用户 当前用户上线
+		this.NotifyOtherOnlineUser(loginMes.UserId)
+		//将当前在线用户id, 拼接到登录响应消息体
+		for id, _ := range userMgr.onlineUsers {
+			loginResMes.UsersId = append(loginResMes.UsersId, id)
+		}
 	}
 	//先将登录响应结果序列化
 	data, err := json.Marshal(loginResMes)
@@ -113,4 +127,46 @@ func (this *UserProcess) ServerProcessRegister(mes *message.Message) (err error)
 	}
 	err = tf.WritePkg(data)
 	return
+}
+
+//通知所有在线用户, 当前用户上线
+func (this *UserProcess) NotifyOtherOnlineUser(userId int) {
+	for id, up := range userMgr.onlineUsers {
+		//跳过当前用户
+		if id == userId {
+			continue
+		}
+		up.NotifyMeOnline(userId)
+	}
+}
+
+//通知在线用户(up) xx(userId)上线
+func (this *UserProcess) NotifyMeOnline(userId int) {
+	var mes message.Message
+	mes.Type = message.NotifyUserStatusMesType
+	var notifyUserStatusMes message.NotifyUserStatusMes
+	notifyUserStatusMes.UserId = userId
+	notifyUserStatusMes.Status = message.UserOnline
+	//赋值前的序列化
+	data, err := json.Marshal(notifyUserStatusMes)
+	if err != nil {
+		fmt.Println("NotifyMeOnline() 推送消息体 序列化失败. err: ", err)
+		return
+	}
+	mes.Data = string(data)
+	//网络传输的序列化
+	data, err = json.Marshal(mes)
+	if err != nil {
+		fmt.Println("NotifyMeOnline() 推送消息体 网络传输序列化失败. err: ", err)
+		return
+	}
+	//发送
+	tf := &utils.Transfer{
+		Conn: this.Conn,
+	}
+	err = tf.WritePkg(data)
+	if err != nil {
+		fmt.Println("NotifyMeOnline() 推送消息失败. err: ", err)
+		return
+	}
 }

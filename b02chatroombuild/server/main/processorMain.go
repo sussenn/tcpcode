@@ -3,10 +3,13 @@ package main
 import (
 	"fmt"
 	"io"
+	"mygithub/tcpcode/b02chatroombuild/common"
+	"mygithub/tcpcode/b02chatroombuild/server/processSer"
+	"mygithub/tcpcode/b02chatroombuild/server/utils"
 	"net"
-	"tcpcode/b02chatroombuild/common"
-	"tcpcode/b02chatroombuild/server/processSer"
-	"tcpcode/b02chatroombuild/server/utils"
+	//"tcpcode/b02chatroombuild/common"
+	//"tcpcode/b02chatroombuild/server/processSer"
+	//"tcpcode/b02chatroombuild/server/utils"
 )
 
 //总控
@@ -30,6 +33,10 @@ func (this *Processor) serverProcessMes(mes *message.Message) (err error) {
 			Conn: this.Conn,
 		}
 		err = up.ServerProcessRegister(mes)
+	case message.SmsMesType:
+		//群发消息
+		smsProcess := &processSer.SmsProcess{}
+		smsProcess.SendGroupMes(mes)
 	default:
 		fmt.Println("消息体类型不匹配...")
 	}

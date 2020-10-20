@@ -3,10 +3,12 @@ package processCli
 import (
 	"encoding/json"
 	"fmt"
+	"mygithub/tcpcode/b02chatroombuild/client/utils"
+	message "mygithub/tcpcode/b02chatroombuild/common"
 	"net"
 	"os"
-	"tcpcode/b02chatroombuild/client/utils"
-	message "tcpcode/b02chatroombuild/common"
+	//"tcpcode/b02chatroombuild/client/utils"
+	//message "tcpcode/b02chatroombuild/common"
 )
 
 type UserProcess struct {
@@ -64,11 +66,33 @@ func (this *UserProcess) Login(userId int, userPwd string) (err error) {
 	var loginResMes message.LoginResMes
 	err = json.Unmarshal([]byte(mes.Data), &loginResMes)
 	if loginResMes.Code == 200 {
+		//实例化CurUser 用于传递用户数据和 通讯连接conn
+		CurUser.Conn = conn
+		CurUser.UserId = userId
+		CurUser.UserStatus = message.UserOnline
+
+		fmt.Println("当前在线用户列表:")
+		//_:数组索引	v:数组值(即userId)
+		for _, v := range loginResMes.UsersId {
+			if v == userId {
+				continue
+			}
+			fmt.Println("用户id:\t", userId)
+			//登录成功后, 实例化用户信息,并存入客户端维护的在线用户map中
+			user := &message.User{
+				UserId: v,
+				//在线
+				UserStatus: message.UserOnline,
+			}
+			//将userId(v) 用户信息(user)存入 在线用户map
+			onlineUsers[v] = user
+		}
 		//开启协程和服务器保持通讯,用于接收服务器推送的消息
+		//接收用户上线推送/群发消息等
 		go serverProcessMes(conn)
 		//fmt.Println("登录成功")
 		for {
-			ShowMenu()
+			ShowMenu(userId)
 		}
 	} else {
 		fmt.Println(loginResMes.Error)

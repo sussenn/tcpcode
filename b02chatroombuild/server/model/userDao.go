@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/garyburd/redigo/redis"
-	message "tcpcode/b02chatroombuild/common"
+	message "mygithub/tcpcode/b02chatroombuild/common"
+	//message "tcpcode/b02chatroombuild/common"
 )
 
 //全局userDao,方便main.go中实例化

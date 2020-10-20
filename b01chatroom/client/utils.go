@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	"tcpcode/b01chatroom/common/message"
-	//"mygithub/tcpcode/b01chatroom/common/message"
+	//"tcpcode/b01chatroom/common/message"
+	"mygithub/tcpcode/b01chatroom/common/message"
 	"net"
 )
 
