@@ -46,7 +46,7 @@ type NotifyUserStatusMes struct {
 	Status int `json:"status"`
 }
 
-//用户状态
+//用户状态	iota:从0开始,往下递增. 即UserOnline = 0, UserOffline = 1 .....
 const (
 	//上线
 	UserOnline = iota
