@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
-	"mygithub/tcpcode/b02chatroombuild/client/processCli"
+	"tcpcode/b02chatroombuild/client/processCli"
+
+	//"mygithub/tcpcode/b02chatroombuild/client/processCli"
 	"os"
 	//"tcpcode/b02chatroombuild/client/processCli"
 )

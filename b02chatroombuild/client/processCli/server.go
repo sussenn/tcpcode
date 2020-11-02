@@ -3,11 +3,12 @@ package processCli
 import (
 	"encoding/json"
 	"fmt"
-	"mygithub/tcpcode/b02chatroombuild/client/utils"
-	message "mygithub/tcpcode/b02chatroombuild/common"
+	message "tcpcode/b02chatroombuild/common"
+	//"mygithub/tcpcode/b02chatroombuild/client/utils"
+	//message "mygithub/tcpcode/b02chatroombuild/common"
 	"net"
 	"os"
-	//"tcpcode/b02chatroombuild/client/utils"
+	"tcpcode/b02chatroombuild/client/utils"
 )
 
 func ShowMenu(userId int) {

@@ -2,8 +2,10 @@ package processCli
 
 import (
 	"fmt"
-	"mygithub/tcpcode/b02chatroombuild/client/model"
-	message "mygithub/tcpcode/b02chatroombuild/common"
+	"tcpcode/b02chatroombuild/client/model"
+	message "tcpcode/b02chatroombuild/common"
+	//"mygithub/tcpcode/b02chatroombuild/client/model"
+	//message "mygithub/tcpcode/b02chatroombuild/common"
 )
 
 //客户端维护的map(存放当前在线用户)

@@ -4,9 +4,9 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	message "mygithub/tcpcode/b02chatroombuild/common"
+	//message "mygithub/tcpcode/b02chatroombuild/common"
 	"net"
-	//message "tcpcode/b02chatroombuild/common"
+	message "tcpcode/b02chatroombuild/common"
 )
 
 type Transfer struct {

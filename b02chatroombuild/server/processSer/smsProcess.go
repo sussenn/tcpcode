@@ -3,8 +3,9 @@ package processSer
 import (
 	"encoding/json"
 	"fmt"
-	message "mygithub/tcpcode/b02chatroombuild/common"
-	"mygithub/tcpcode/b02chatroombuild/server/utils"
+	message "tcpcode/b02chatroombuild/common"
+	//message "mygithub/tcpcode/b02chatroombuild/common"
+	//"mygithub/tcpcode/b02chatroombuild/server/utils"
 	"net"
 )
 

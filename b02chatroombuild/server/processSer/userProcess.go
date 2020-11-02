@@ -3,13 +3,13 @@ package processSer
 import (
 	"encoding/json"
 	"fmt"
-	message "mygithub/tcpcode/b02chatroombuild/common"
-	"mygithub/tcpcode/b02chatroombuild/server/model"
-	"mygithub/tcpcode/b02chatroombuild/server/utils"
+	//message "mygithub/tcpcode/b02chatroombuild/common"
+	//"mygithub/tcpcode/b02chatroombuild/server/model"
+	//"mygithub/tcpcode/b02chatroombuild/server/utils"
 	"net"
-	//message "tcpcode/b02chatroombuild/common"
-	//"tcpcode/b02chatroombuild/server/model"
-	//"tcpcode/b02chatroombuild/server/utils"
+	message "tcpcode/b02chatroombuild/common"
+	"tcpcode/b02chatroombuild/server/model"
+	"tcpcode/b02chatroombuild/server/utils"
 )
 
 type UserProcess struct {
