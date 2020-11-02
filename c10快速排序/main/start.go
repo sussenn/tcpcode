@@ -60,4 +60,5 @@ func QuickSort(left int, right int, array *[5]int) {
 	if right > l {
 		QuickSort(l, right, array)
 	}
+
 }
